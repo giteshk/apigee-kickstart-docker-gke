@@ -4,6 +4,5 @@ WORKDIR /app
 
 COPY . .
 
-RUN composer require apigee/apigee_devportal_kickstart
-
+RUN composer install --no-dev
 
