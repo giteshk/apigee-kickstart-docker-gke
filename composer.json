@@ -34,8 +34,7 @@
     },
     "scripts": {
         "post-deploy-cmd": [
-            "alias drush='/app/vendor/bin/drush --root=/app'",
-            "drush updb -y || true"
+            "./vendor/bin/drush updb -y || true"
         ]
     },
     "extra": {
