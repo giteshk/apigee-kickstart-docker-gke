@@ -4,5 +4,6 @@ WORKDIR /app
 
 COPY . .
 
-RUN composer install --no-dev
+
+RUN composer update -n --no-dev --no-suggest
 

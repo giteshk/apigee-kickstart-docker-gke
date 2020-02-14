@@ -15,28 +15,11 @@
         }
     ],
     "require": {
-        "php": ">=7.2.0",
-        "ext-date": "*",
-        "ext-dom": "*",
-        "ext-filter": "*",
-        "ext-gd": "*",
-        "ext-hash": "*",
-        "ext-json": "*",
-        "ext-pcre": "*",
-        "ext-pdo": "*",
-        "ext-session": "*",
-        "ext-simplexml": "*",
-        "ext-spl": "*",
-        "ext-tokenizer": "*",
-        "ext-xml": "*",
         "apigee/apigee_devportal_kickstart": "^1.9",
         "composer/installers": "^1.2",
         "drupal/core-composer-scaffold": "^8.8",
         "drupal/core-project-message": "^8.8",
-        "drupal/core-recommended": "^8.8",
-        "drupal/jsonapi_extras": "^3.13",
-        "drupal/jsonapi_extras_bulk": "dev",
-        "drush/drush": "^10.2"
+        "drupal/core-recommended": "^8.8"
     },
     "require-dev": {
         "drupal/core-dev": "^8.8"
@@ -51,7 +34,8 @@
     },
     "scripts": {
         "post-deploy-cmd": [
-            "./vendor/bin/drush updb -y || true"
+            "alias drush='/app/vendor/bin/drush --root=/app'",
+            "drush updb -y || true"
         ]
     },
     "extra": {
@@ -88,12 +72,6 @@
                 "  * Remove the plugin that prints this message:",
                 "      composer remove drupal/core-project-message"
             ]
-        },
-        "patches": {
-            "drupal/core": {
-                "Support entities that are neither content nor config entities" : "https://www.drupal.org/files/issues/2019-05-29/3042467-31.patch",
-                "JSON:API call to a member function getTypeName() on boolean" : "https://www.drupal.org/files/issues/2019-05-29/3034786-36.patch"
-            }
         }
     }
 }
