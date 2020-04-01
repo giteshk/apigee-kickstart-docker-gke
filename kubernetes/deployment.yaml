@@ -14,10 +14,8 @@ spec:
     spec:
       volumes:
         - name: nfs-drupal-files-vol
-          nfs:
-            server: 10.127.174.242
-            path: /drupal_files/apigee-kickstart-gcp-docker
-            readOnly: false
+          persistentVolumeClaim:
+            claimName: nfs-drupal-files
       containers:
         - name: drupal-web
           image: gcr.io/gkoli-d8-kubernetes/github_giteshk_apigee-kickstart-gcp-docker:latest
