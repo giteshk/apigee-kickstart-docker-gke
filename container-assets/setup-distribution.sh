@@ -15,7 +15,7 @@ cp -f /app/container-assets/parameterized.settings.php /app/code/web/sites/defau
 chown -R www-data.www-data /app/code/web/sites/default/settings.php \
     && chmod -R 664 /app/code/web/sites/default/settings.php
 
-ln -sf drupal-files/public code/web/sites/default/files
+ln -sf ../../../../drupal-files/public code/web/sites/default/files
 
 #create the file system for public, private, temp files
 mkdir -p /app/drupal-files/public \
