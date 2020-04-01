@@ -22,7 +22,7 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sh", "-c", "chown -R www-data:www-data /app/drupal-files"]
+                command: ["/bin/sh", "-c", "chmod -R 664 /app/drupal-files"]
           ports:
             - name: drupal-app-port
               containerPort: 8080
@@ -80,7 +80,7 @@ spec:
             - name: DRUPAL_FILE_TEMP_PATH
               value: /app/drupal-files/temp
             - name: DRUPAL_CONFIG_SYNC_DIR
-              value: /app/drupal-files/private/config
+              value: /app/drupal-files/config
           volumeMounts:
             - mountPath: /app/drupal-files/public
               name: nfs-drupal-files-vol
@@ -91,16 +91,6 @@ spec:
             - mountPath: /app/drupal-files/temp
               name: nfs-drupal-files-vol
               subPath: temp-files
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: drupal-lb-service
-spec:
-  selector:
-    role: drupal-web-server
-  ports:
-    - port: 80
-      targetPort: 8080
-  sessionAffinity: ClientIP
-  type: LoadBalancer
+            - mountPath: /app/drupal-files/config
+              name: nfs-drupal-files-vol
+              subPath: drupal-config

@@ -17,8 +17,6 @@
 
 set -xe
 
-docker-compose build
-
 docker-compose run --rm \
         --entrypoint="/bin/bash" apigee-kickstart \
         /app/container-assets/setup-distribution.sh
