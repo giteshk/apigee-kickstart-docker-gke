@@ -18,7 +18,7 @@ spec:
             claimName: nfs-drupal-files
       containers:
         - name: drupal-web
-          image: gcr.io/gkoli-d8-kubernetes/github_giteshk_apigee-kickstart-gcp-docker:latest
+          image: gcr.io/gkoli-d8-kubernetes/github_giteshk_apigee-kickstart-gcp-docker
           lifecycle:
             postStart:
               exec:
