@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: drupal-web
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       role: drupal-web-server
@@ -22,7 +22,7 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sh", "-c", "chmod -R 664 /app/drupal-files /app/code/web/sites/default/files"]
+                command: ["/bin/sh", "-c", "chown -R www-data:www-data /app && chmod -R 775 /app/drupal-files"]
           ports:
             - name: drupal-app-port
               containerPort: 8080
@@ -77,10 +77,10 @@ spec:
               value: sites/default/files
             - name: DRUPAL_FILE_PRIVATE_PATH
               value: /app/drupal-files/private
-            - name: DRUPAL_FILE_TEMP_PATH
-              value: /app/drupal-files/temp
+#            - name: DRUPAL_FILE_TEMP_PATH
+#              value: /app/drupal-files/temp
             - name: DRUPAL_CONFIG_SYNC_DIR
-              value: /app/drupal-files/config
+              value: /app/drupal-files/private/config
           volumeMounts:
             - mountPath: /app/drupal-files/public
               name: nfs-drupal-files-vol
