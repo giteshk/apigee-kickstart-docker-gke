@@ -1,0 +1,110 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: drupal-web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      role: drupal-web-server
+  template:
+    metadata:
+      labels:
+        role: drupal-web-server
+    spec:
+      volumes:
+        - name: nfs-drupal-files-vol
+          accessModes:
+            - ReadWriteMany
+          nfs:
+            server: <IP_ADDRESS>
+            path: /<PATH>
+            readOnly: false
+      containers:
+        - name: drupal-web
+          image: gcr.io/<project-name>/apigee-kickstart-gcp-docker:latest
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "chown -R www-data:www-data /app/drupal-files /app/code/web/sites/default/files"]
+          ports:
+            - name: drupal-app-port
+              containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /liveness_check
+              port: drupal-app-port
+            initialDelaySeconds: 60
+            failureThreshold: 5
+            periodSeconds: 30
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /readiness_check
+              port: drupal-app-port
+            initialDelaySeconds: 30
+            failureThreshold: 5
+            periodSeconds: 30
+            timeoutSeconds: 5
+          env:
+            - name: DRUPAL_DATABASE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: drupal-application-configuration
+                  key: database-host
+            - name: DRUPAL_DATABASE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: drupal-application-configuration
+                  key: database-port
+            - name: DRUPAL_DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: cloudsql-db-credentials
+                  key: dbusername
+            - name: DRUPAL_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: cloudsql-db-credentials
+                  key: dbpassword
+            - name: DRUPAL_DATABASE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: drupal-application-configuration
+                  key: database-name
+            - name: DRUPAL_DATABASE_DRIVER
+              valueFrom:
+                configMapKeyRef:
+                  name: drupal-application-configuration
+                  key: database-driver
+            - name: DRUPAL_FILE_PUBLIC_PATH
+              value: sites/default/files
+            - name: DRUPAL_FILE_PRIVATE_PATH
+              value: /app/drupal-files/private
+            - name: DRUPAL_FILE_TEMP_PATH
+              value: /app/drupal-files/temp
+            - name: DRUPAL_CONFIG_SYNC_DIR
+              value: /app/drupal-files/config
+          volumeMounts:
+            - mountPath: /app/code/web/sites/default/files
+              name: nfs-drupal-files-vol
+              subPath: public-files
+            - mountPath: /app/drupal-files/private
+              name: nfs-drupal-files-vol
+              subPath: private-files
+            - mountPath: /app/drupal-files/temp
+              name: nfs-drupal-files-vol
+              subPath: temp-files
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: drupal-lb-service
+spec:
+  selector:
+    role: drupal-web-server
+  ports:
+    - port: 80
+      targetPort: 8080
+  sessionAffinity: ClientIP
+  type: LoadBalancer

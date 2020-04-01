@@ -1,0 +1,51 @@
+
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#   https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+version: '3'
+services:
+  apigee-kickstart:
+    build:
+      context: .
+      dockerfile: container-assets/Dockerfile
+    ports:
+      - "5000:8080"
+    environment:
+      - DRUPAL_DATABASE_NAME=drupal_db
+      - DRUPAL_DATABASE_USER=dbuser
+      - DRUPAL_DATABASE_PASSWORD=passw0rd
+      - DRUPAL_DATABASE_HOST=drupal-database
+      - DRUPAL_DATABASE_PORT=3306
+      - DRUPAL_DATABASE_DRIVER=mysql
+      - DRUPAL_FILE_PUBLIC_PATH=sites/default/files
+      - DRUPAL_FILE_PRIVATE_PATH=/app/drupal-files/private
+      - DRUPAL_FILE_TEMP_PATH=/app/drupal-files/temp
+      - DRUPAL_CONFIG_SYNC_DIR=/app/drupal-files/config
+    links:
+      - drupal-database
+    volumes:
+      - ./container-assets:/app/container-assets
+      - ./code:/app/code:delegated
+      - ./drupal-files:/app/drupal-files:delegated
+  drupal-database:
+    image: mariadb:latest
+    volumes:
+      - drupal-db-volume:/var/lib/mysql:delegated
+    environment:
+      - MYSQL_DATABASE=drupal_db
+      - MYSQL_USER=dbuser
+      - MYSQL_PASSWORD=passw0rd
+      - MYSQL_ROOT_PASSWORD=rootpasswd
+volumes:
+  drupal-db-volume:

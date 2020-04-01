@@ -1,3 +1,8 @@
-environment.txt
+docker-compose.yml
 README.md
-Samples-Deployments/
+kubernetes/
+code/web/sites/default/files/
+code/web/sites/default/private/
+code/web/sites/default/temp/
+drupal-files/private/
+drupal-files/temp/

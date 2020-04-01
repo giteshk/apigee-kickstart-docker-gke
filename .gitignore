@@ -1,0 +1,6 @@
+.DS_Store
+/.idea/
+/vendor/
+/drupal-files/public/
+/drupal-files/private/
+/drupal-files/temp/
