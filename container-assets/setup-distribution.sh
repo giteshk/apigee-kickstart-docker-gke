@@ -15,13 +15,15 @@ cp -f /app/container-assets/parameterized.settings.php /app/code/web/sites/defau
 chown -R www-data.www-data /app/code/web/sites/default/settings.php \
     && chmod -R 755 /app/code/web/sites/default/settings.php
 
+ln -sf drupal-files/public code/web/sites/default/files
+
 #create the file system for public, private, temp files
-mkdir -p /app/code/web/sites/default/files \
+mkdir -p /app/drupal-files/public \
     && mkdir -p /app/drupal-files/private \
     && mkdir -p /app/drupal-files/temp
 
-chown -R www-data.www-data /app/code/web/sites/default/files \
-    && chmod -R 755 /app/code/web/sites/default/files \
+chown -R www-data.www-data  /app/drupal-files/public \
+    && chmod -R 755  /app/drupal-files/public \
     && chown -R www-data.www-data /app/drupal-files/private \
     && chmod -R 755 /app/drupal-files/private \
     && chown -R www-data.www-data /app/drupal-files/temp \

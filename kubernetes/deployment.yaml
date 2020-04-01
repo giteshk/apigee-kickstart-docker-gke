@@ -14,19 +14,17 @@ spec:
     spec:
       volumes:
         - name: nfs-drupal-files-vol
-          accessModes:
-            - ReadWriteMany
           nfs:
-            server: <IP_ADDRESS>
-            path: /<PATH>
+            server: 10.127.174.242
+            path: /drupal_files/apigee-kickstart-gcp-docker
             readOnly: false
       containers:
         - name: drupal-web
-          image: gcr.io/<project-name>/apigee-kickstart-gcp-docker:latest
+          image: gcr.io/gkoli-d8-kubernetes/github_giteshk_apigee-kickstart-gcp-docker:latest
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sh", "-c", "chown -R www-data:www-data /app/drupal-files /app/code/web/sites/default/files"]
+                command: ["/bin/sh", "-c", "chown -R www-data:www-data /app/drupal-files"]
           ports:
             - name: drupal-app-port
               containerPort: 8080
@@ -84,9 +82,9 @@ spec:
             - name: DRUPAL_FILE_TEMP_PATH
               value: /app/drupal-files/temp
             - name: DRUPAL_CONFIG_SYNC_DIR
-              value: /app/drupal-files/config
+              value: /app/drupal-files/private/config
           volumeMounts:
-            - mountPath: /app/code/web/sites/default/files
+            - mountPath: /app/drupal-files/public
               name: nfs-drupal-files-vol
               subPath: public-files
             - mountPath: /app/drupal-files/private
