@@ -22,7 +22,7 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sh", "-c", "chmod -R 664 /app/drupal-files"]
+                command: ["/bin/sh", "-c", "chmod -R 664 /app/drupal-files /app/code/web/sites/default/files"]
           ports:
             - name: drupal-app-port
               containerPort: 8080

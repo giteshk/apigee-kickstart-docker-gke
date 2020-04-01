@@ -21,6 +21,7 @@ mkdir -p /app/drupal-files/public \
     && mkdir -p /app/drupal-files/config \
     && mkdir -p /app/drupal-files/temp
 
+rm -rf code/web/sites/default/files
 ln -sf ../../../../drupal-files/public code/web/sites/default/files
 
 chown -R www-data.www-data  /app/drupal-files/public \
