@@ -1,8 +1,11 @@
 docker-compose.yml
+setup-project.sh
+update-distribution.sh
 README.md
 kubernetes/
 code/web/sites/default/files/
 code/web/sites/default/private/
 code/web/sites/default/temp/
+drupal-files/config/
 drupal-files/private/
 drupal-files/temp/

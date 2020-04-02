@@ -1,6 +1,7 @@
 .DS_Store
 /.idea/
 /vendor/
-/drupal-files/public/
+/code/web/sites/default/files/
+/drupal-files/config/
 /drupal-files/private/
 /drupal-files/temp/

@@ -1,10 +1,7 @@
 #!/bin/bash
 
-if [ ! -d /app/code/vendor ]; then
-    composer install --working-dir=/app/code
-    # remove embeded git repositories
-    find /app/code -mindepth 2 -type d -name .git | xargs rm -rf
-fi
+composer update --working-dir=/app/code --with-dependencies
+find /app/code -mindepth 2 -type d -name .git | xargs rm -rf
 
 cp /app/container-assets/drush.sh /usr/local/bin/drush && chmod 755 /usr/local/bin/drush
 
