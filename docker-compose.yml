@@ -19,6 +19,7 @@ services:
     build:
       context: .
       dockerfile: container-assets/Dockerfile
+    command: ["/bin/sh", "-c", "chown -R www-data:www-data /app && chmod -R 775 /app/drupal-files"]
     ports:
       - "5000:8080"
     environment:
@@ -28,10 +29,6 @@ services:
       - DRUPAL_DATABASE_HOST=drupal-database
       - DRUPAL_DATABASE_PORT=3306
       - DRUPAL_DATABASE_DRIVER=mysql
-      - DRUPAL_FILE_PUBLIC_PATH=sites/default/files
-      - DRUPAL_FILE_PRIVATE_PATH=/app/drupal-files/private
-      - DRUPAL_FILE_TEMP_PATH=/app/drupal-files/temp
-      - DRUPAL_CONFIG_SYNC_DIR=/app/drupal-files/config
     links:
       - drupal-database
     volumes:

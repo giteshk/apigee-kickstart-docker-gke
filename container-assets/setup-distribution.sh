@@ -16,21 +16,18 @@ chown -R www-data.www-data /app/code/web/sites/default/settings.php \
     && chmod -R 664 /app/code/web/sites/default/settings.php
 
 #create the file system for public, private, temp files
-mkdir -p /app/drupal-files/public \
+mkdir -p /app/code/web/sites/default/files \
     && mkdir -p /app/drupal-files/private \
     && mkdir -p /app/drupal-files/config \
     && mkdir -p /app/drupal-files/temp
 
-rm -rf code/web/sites/default/files
-ln -sf ../../../../drupal-files/public code/web/sites/default/files
-
-chown -R www-data.www-data  /app/drupal-files/public \
-    && chmod -R 664  /app/drupal-files/public \
-    && chown -R www-data.www-data /app/code/web/sites/default/files \
-    && chmod -R 664 /app/code/web/sites/default/files \
-    && chown -R www-data.www-data /app/drupal-files/private \
-    && chmod -R 664 /app/drupal-files/private \
-    && chown -R www-data.www-data /app/drupal-files/config \
-    && chmod -R 664 /app/drupal-files/config \
-    && chown -R www-data.www-data /app/drupal-files/temp \
-    && chmod -R 664 /app/drupal-files/temp
+#chown -R www-data.www-data  /app/code/web/sites/default/files \
+#    && chmod -R 664  /app/code/web/sites/default/files \
+#    && chown -R www-data.www-data /app/code/web/sites/default/files \
+#    && chmod -R 664 /app/code/web/sites/default/files \
+#    && chown -R www-data.www-data /app/drupal-files/private \
+#    && chmod -R 664 /app/drupal-files/private \
+#    && chown -R www-data.www-data /app/drupal-files/config \
+#    && chmod -R 664 /app/drupal-files/config \
+#    && chown -R www-data.www-data /app/drupal-files/temp \
+#    && chmod -R 664 /app/drupal-files/temp

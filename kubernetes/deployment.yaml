@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: drupal-web
+  name: apigee-devportal-deployment
 spec:
   replicas: 3
   selector:
     matchLabels:
-      role: drupal-web-server
+      role: apigee-devportal-drupal-web-server
   template:
     metadata:
       labels:
-        role: drupal-web-server
+        role: apigee-devportal-drupal-web-server
     spec:
       volumes:
         - name: nfs-drupal-files-vol
           persistentVolumeClaim:
-            claimName: nfs-drupal-files
+            claimName: apigee-devportal-drupal-files
       containers:
-        - name: drupal-web
+        - name: apigee-devportal
           image: gcr.io/gkoli-d8-kubernetes/github_giteshk_apigee-kickstart-gcp-docker
           lifecycle:
             postStart:
@@ -82,7 +82,7 @@ spec:
             - name: DRUPAL_CONFIG_SYNC_DIR
               value: /app/drupal-files/config
           volumeMounts:
-            - mountPath: /app/drupal-files/public
+            - mountPath: /app/code/web/sites/default/files
               name: nfs-drupal-files-vol
               subPath: public-files
             - mountPath: /app/drupal-files/private
