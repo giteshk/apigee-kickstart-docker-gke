@@ -7,7 +7,7 @@ This is a sample project to show you how to setup
 [Apigee Developer Portal Kickstart](https://www.drupal.org/project/apigee_devportal_kickstart) on Google Kubernetes Engine
 
 The reason we used the [GCP PHP docker base image](https://github.com/GoogleCloudPlatform/php-docker/tree/master/php-onbuild)
- to take advantage of the updates that the team maintains and also the integrations with other GCP tools
+ is to take advantage of the updates GCP team provides and also to use integrations with other GCP tools
 
 ## Running this setup on GKE
 
@@ -79,6 +79,9 @@ The reason we used the [GCP PHP docker base image](https://github.com/GoogleClou
     ```
     kubectl apply -f kubernetes/
     ```
+
+12. Get the Load Balancer IP from the Services. Use that to start the install process from the browser.
+
 
 ## Running this setup locally
 <a id="run-this-setup"></a>
