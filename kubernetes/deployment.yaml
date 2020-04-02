@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: drupal-web
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       role: drupal-web-server
@@ -77,10 +77,10 @@ spec:
               value: sites/default/files
             - name: DRUPAL_FILE_PRIVATE_PATH
               value: /app/drupal-files/private
-#            - name: DRUPAL_FILE_TEMP_PATH
-#              value: /app/drupal-files/temp
+            - name: DRUPAL_FILE_TEMP_PATH
+              value: /app/drupal-files/temp
             - name: DRUPAL_CONFIG_SYNC_DIR
-              value: /app/drupal-files/private/config
+              value: /app/drupal-files/config
           volumeMounts:
             - mountPath: /app/drupal-files/public
               name: nfs-drupal-files-vol
