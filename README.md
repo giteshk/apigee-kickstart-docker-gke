@@ -1,11 +1,13 @@
-# Apigee Kickstart docker image based on Google App Engine Flex PHP image
+# Apigee Kickstart docker image based on Google App Engine Flex PHP runtime
 
 _This is an open-source project. It is not covered by Apigee support contracts. 
  For help, please open an issue in this GitHub project. You are also always welcome to submit a pull request._
 
-This is a sample project to show you how to setup [Apigee Developer Portal Kickstart](https://www.drupal.org/project/apigee_devportal_kickstart) on Google Kubernetes Engine
+This is a sample project to show you how to setup 
+[Apigee Developer Portal Kickstart](https://www.drupal.org/project/apigee_devportal_kickstart) on Google Kubernetes Engine
 
-The reason we used the GCP PHP docker image to take advantage of the updates that the team maintains and also the integrations with other GCP tools
+The reason we used the [GCP PHP docker base image](https://github.com/GoogleCloudPlatform/php-docker/tree/master/php-onbuild)
+ to take advantage of the updates that the team maintains and also the integrations with other GCP tools
 
 ## Running this setup on GKE
 
