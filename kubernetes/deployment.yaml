@@ -18,7 +18,7 @@ spec:
             claimName: apigee-devportal-drupal-files
       containers:
         - name: apigee-devportal
-          image: gcr.io/gkoli-d8-kubernetes/github_giteshk_apigee-kickstart-gcp-docker
+          image: <IMAGE>:latest
           lifecycle:
             postStart:
               exec:
@@ -46,32 +46,32 @@ spec:
             - name: DRUPAL_DATABASE_HOST
               valueFrom:
                 configMapKeyRef:
-                  name: drupal-application-configuration
+                  name: apigee-devportal-configuration
                   key: database-host
             - name: DRUPAL_DATABASE_PORT
               valueFrom:
                 configMapKeyRef:
-                  name: drupal-application-configuration
+                  name: apigee-devportal-configuration
                   key: database-port
             - name: DRUPAL_DATABASE_USER
               valueFrom:
                 secretKeyRef:
-                  name: cloudsql-db-credentials
+                  name: apigee-devportal-credentials
                   key: dbusername
             - name: DRUPAL_DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: cloudsql-db-credentials
+                  name: apigee-devportal-credentials
                   key: dbpassword
             - name: DRUPAL_DATABASE_NAME
               valueFrom:
                 configMapKeyRef:
-                  name: drupal-application-configuration
+                  name: apigee-devportal-configuration
                   key: database-name
             - name: DRUPAL_DATABASE_DRIVER
               valueFrom:
                 configMapKeyRef:
-                  name: drupal-application-configuration
+                  name: apigee-devportal-configuration
                   key: database-driver
             - name: DRUPAL_FILE_PUBLIC_PATH
               value: sites/default/files
@@ -84,13 +84,13 @@ spec:
           volumeMounts:
             - mountPath: /app/code/web/sites/default/files
               name: nfs-drupal-files-vol
-              subPath: public-files
+              subPath: public
             - mountPath: /app/drupal-files/private
               name: nfs-drupal-files-vol
-              subPath: private-files
+              subPath: private
             - mountPath: /app/drupal-files/temp
               name: nfs-drupal-files-vol
-              subPath: temp-files
+              subPath: temp
             - mountPath: /app/drupal-files/config
               name: nfs-drupal-files-vol
-              subPath: drupal-config
+              subPath: config

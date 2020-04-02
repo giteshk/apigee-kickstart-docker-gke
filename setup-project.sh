@@ -22,3 +22,5 @@ docker-compose run --rm \
         /app/container-assets/setup-distribution.sh
 
 echo "Finished setting up the code directory"
+
+docker-compose up --build

@@ -9,7 +9,7 @@ spec:
     - ReadWriteMany
   nfs:
     server: <IP_ADDRESS>
-    path: <PATH>
+    path: /portal_files
     readOnly: false
 ---
 kind: PersistentVolumeClaim
