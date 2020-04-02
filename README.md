@@ -82,7 +82,7 @@ The reason we used the GCP PHP docker image to take advantage of the updates tha
 <a id="run-this-setup"></a>
 > You will need docker-compose to run this setup locally. Installation instructions [here](https://docs.docker.com/compose/install/)
 
-> Please note docker-compose on Mac could be slow. 
+> Please note Docker on Mac could be slow. 
 
 1. To setup the local project run `./setup-project.sh`
    - This will run "composer install" and setup the `code` directory and the drupal-files directory locally.
@@ -106,11 +106,19 @@ The reason we used the GCP PHP docker image to take advantage of the updates tha
 
 6. To update the dependencies you can run `./update-project.sh` and then commit all the updates in the `code` directory to source control.
 
-7. To ssh into the Drupal container use `docker-compose exec apigee-kickstart /bin/bash`
+7. To ssh into the Drupal container use 
+    ```
+        docker-compose exec apigee-kickstart /bin/bash
+   ```
     - You can run drush commands or composer install commands from the /app/code directory
     - code and the drupal-files directories are mounted to /app/code or /app/drupal-files directories on the container. 
     So any changes you make will be automatically reflected in that directory.
 
+8. To get access to the database you can run 
+    ```
+    docker-compose exec apigee-kickstart drush sqlc
+   ```
+   
 ## Remove your local docker containers, images, volumes
 
     docker-compose down -v

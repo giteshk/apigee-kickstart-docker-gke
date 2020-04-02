@@ -50,3 +50,5 @@ VOLUME /app/drupal-files/config
 
 
 RUN /app/container-assets/setup-distribution.sh
+
+CMD ["/app/container-assets/startup.sh" , "&&" , "/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]

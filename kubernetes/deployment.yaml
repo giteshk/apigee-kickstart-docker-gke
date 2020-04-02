@@ -19,10 +19,10 @@ spec:
       containers:
         - name: apigee-devportal
           image: <IMAGE>:latest
-          lifecycle:
-            postStart:
-              exec:
-                command: ["/bin/sh", "-c", "chown -R www-data:www-data /app && chmod -R 775 /app/drupal-files"]
+#          lifecycle:
+#            postStart:
+#              exec:
+#                command: ["/bin/sh", "-c", "chown -R www-data:www-data /app && chmod -R 775 /app/drupal-files"]
           ports:
             - name: drupal-app-port
               containerPort: 8080

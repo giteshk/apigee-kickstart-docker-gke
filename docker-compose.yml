@@ -37,11 +37,11 @@ services:
   apigee-kickstart-database:
     image: mariadb:latest
     volumes:
-      - drupal-db-volume:/var/lib/mysql:delegated
+      - apigee-kickstart-database-volume:/var/lib/mysql:delegated
     environment:
       - MYSQL_DATABASE=apigee_devportal
       - MYSQL_USER=dbuser
       - MYSQL_PASSWORD=passw0rd
       - MYSQL_ROOT_PASSWORD=rootpasswd
 volumes:
-  drupal-db-volume:
+  apigee-kickstart-database-volume:
