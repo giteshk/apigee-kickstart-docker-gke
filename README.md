@@ -26,12 +26,13 @@ The reason we used the [GCP PHP docker base image](https://github.com/GoogleClou
    ```
     MYSQL_INSTANCE_NAME=apigee-devportal-instance
     COMPUTE_REGION=us-east1
+    COMPUTE_ZONE=us-east1-c
     DRUPAL_DB_NAME=apigee_devportal
     DRUPAL_DB_USER=portal_dbuser
     DRUPAL_DB_PASS=portal_dbpassword
 
     gcloud beta sql instances create $MYSQL_INSTANCE_NAME \
-        --tier=db-n1-standard-2 --region=$COMPUTE_REGION
+        --tier=db-n1-standard-2 --region=$COMPUTE_REGION  --network=default --no-assign-ip
     
     gcloud sql databases create $DRUPAL_DB_NAME --instance=$MYSQL_INSTANCE_NAME
     
@@ -44,7 +45,7 @@ The reason we used the [GCP PHP docker base image](https://github.com/GoogleClou
    You may choose to use the following gcloud command
    ```
     gcloud filestore instances create apigee-devportal-files-instance \
-       --zone=us-east1-d --file-share=capacity=1TB,name=portal_files --network=name=default
+       --zone=$COMPUTE_ZONE --file-share=capacity=1TB,name=portal_files --network=name=default
     ```
 7. [Create a Kubenetes cluster](https://console.cloud.google.com/kubernetes/add) or you may choose to deploy this application to an existing cluster
 
