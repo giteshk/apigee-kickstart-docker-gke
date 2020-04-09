@@ -36,7 +36,7 @@ ENV DRUPAL_CONFIG_SYNC_DIR "/app/drupal-files/config"
 
 WORKDIR /app
 
-COPY --chown=www-data:www-data code code
+COPY code code
 COPY drupal-files drupal-files
 COPY container-assets container-assets
 COPY container-assets/nginx-app.conf nginx-app.conf
@@ -48,7 +48,6 @@ VOLUME /app/drupal-files/private
 VOLUME /app/drupal-files/temp
 VOLUME /app/drupal-files/config
 
-RUN chmod -R 550 /app/container-assets & /app/container-assets/setup-distribution.sh
-RUN chmod -R 550 /app/code
+RUN /app/container-assets/setup-distribution.sh
 
 CMD ["/app/container-assets/startup.sh"]

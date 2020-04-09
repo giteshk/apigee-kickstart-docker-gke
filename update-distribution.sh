@@ -17,6 +17,8 @@
 
 set -xe
 
+chmod -R 777 .
+
 docker-compose run --rm \
         --entrypoint="/bin/bash" apigee-kickstart \
         /app/container-assets/update-distribution.sh
