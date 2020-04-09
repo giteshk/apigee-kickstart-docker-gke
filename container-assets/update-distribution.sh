@@ -9,8 +9,8 @@ cp /app/container-assets/drush.sh /usr/local/bin/drush && chmod 755 /usr/local/b
 cp -f /app/container-assets/parameterized.settings.php /app/code/web/sites/default/settings.php
 
 # fix permissions
-chown -R www-data.www-data /app/code/web/sites/default/settings.php \
-    && chmod -R 664 /app/code/web/sites/default/settings.php
+chown -R www-data.www-data /app/ \
+    && chmod -R 550 /app/
 
 #create the file system for public, private, temp files
 mkdir -p /app/code/web/sites/default/files \

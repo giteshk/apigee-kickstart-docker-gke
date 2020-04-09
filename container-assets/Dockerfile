@@ -36,7 +36,7 @@ ENV DRUPAL_CONFIG_SYNC_DIR "/app/drupal-files/config"
 
 WORKDIR /app
 
-COPY code code
+COPY --chown=www-data:www-data code code
 COPY drupal-files drupal-files
 COPY container-assets container-assets
 COPY container-assets/nginx-app.conf nginx-app.conf
