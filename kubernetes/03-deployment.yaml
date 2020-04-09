@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: apigee-devportal-deployment
+  namespace: apigee-devportal
 spec:
   replicas: 3
   selector:
@@ -30,7 +31,7 @@ spec:
             httpGet:
               path: /liveness_check
               port: drupal-app-port
-            initialDelaySeconds: 60
+            initialDelaySeconds: 120
             failureThreshold: 5
             periodSeconds: 30
             timeoutSeconds: 5
@@ -38,7 +39,7 @@ spec:
             httpGet:
               path: /readiness_check
               port: drupal-app-port
-            initialDelaySeconds: 30
+            initialDelaySeconds: 120
             failureThreshold: 5
             periodSeconds: 30
             timeoutSeconds: 5

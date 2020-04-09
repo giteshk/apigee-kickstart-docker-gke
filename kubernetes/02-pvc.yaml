@@ -2,9 +2,10 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: apigee-devportal-drupal-files
+  namespace: apigee-devportal
 spec:
   capacity:
-    storage: 10Gi
+    storage: 50Gi
   accessModes:
     - ReadWriteMany
   nfs:
@@ -22,4 +23,5 @@ spec:
   storageClassName: ""
   resources:
     requests:
-      storage: 10Gi
+      storage: 50Gi
+---
