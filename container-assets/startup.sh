@@ -9,7 +9,7 @@ else
   chmod -R 770 /app/drupal-files /app/code/web/sites/default/files
 fi
 
-
-# chmod 770 /app/code/web/sites/default/settings.php
+# Use the settings file which has been parameterized using Environment variables
+cp -f /app/container-assets/parameterized.settings.php /app/code/web/sites/default/settings.php
 
 /usr/bin/supervisord -c /etc/supervisor/supervisord.conf

@@ -17,6 +17,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: apigee-devportal-drupal-files
+  namespace: apigee-devportal
 spec:
   accessModes:
     - ReadWriteMany
