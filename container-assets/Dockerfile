@@ -48,7 +48,7 @@ VOLUME /app/drupal-files/private
 VOLUME /app/drupal-files/temp
 VOLUME /app/drupal-files/config
 
-
-RUN /app/container-assets/setup-distribution.sh
+RUN chmod -R 550 /app/container-assets & /app/container-assets/setup-distribution.sh
+RUN chmod -R 550 /app/code
 
 CMD ["/app/container-assets/startup.sh"]
