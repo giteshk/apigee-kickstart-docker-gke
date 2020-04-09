@@ -34,6 +34,9 @@ ENV DRUPAL_FILE_PRIVATE_PATH "/app/drupal-files/private"
 ENV DRUPAL_FILE_TEMP_PATH "/app/drupal-files/temp"
 ENV DRUPAL_CONFIG_SYNC_DIR "/app/drupal-files/config"
 
+#skip lockdown because the setup and startup scripts take care of this
+ENV SKIP_LOCKDOWN_DOCUMENT_ROOT "true"
+
 WORKDIR /app
 
 COPY code code
