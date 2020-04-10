@@ -1,5 +1,5 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/$REPO_NAME:latest', '-f', 'container-assets/Dockerfile', '.']
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/apigee-devportal-kickstart:latest', '-f', 'container-assets/Dockerfile', '.']
 images:
   - 'gcr.io/$PROJECT_ID/$REPO_NAME:latest'
