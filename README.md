@@ -47,41 +47,39 @@ The reason we used the [GCP PHP docker base image](https://github.com/GoogleClou
     gcloud filestore instances create apigee-devportal-files-instance \
        --zone=$COMPUTE_ZONE --file-share=capacity=1TB,name=portal_files --network=name=default
     ```
-7. [Create a Kubenetes cluster](https://console.cloud.google.com/kubernetes/add) or you may choose to deploy this application to an existing cluster
+7. [Create a Kubernetes cluster](https://console.cloud.google.com/kubernetes/add) or you may choose to deploy this application to an existing cluster
 
-8. Modify the configuration files in the kubenetes folder
-   - pvc.yaml 
-     - Replace <IP_ADDRESS> with the IP address of the newly create Filestore instance
-     - If you modifled the file-share name replace `/portal_files` with your value (`/` prefix required).
-   - deployment.yaml
-     - Replace the < IMAGE > with the image url from Container Registry or Docker Hub that you setup. 
-     Add the appropriate tag as needed (Cloudbuild defaults to `latest`).
-
-   _You can choose to commit kubernetes config file changes to your repository so you can setup Automated Deployments on GKE_
-
-9. Setup the ConfigMap to configure the environment variables
+8. Copy the kubernetes/dev.example.com and set one up for your project e.g. developer.acme.com
    ```
-    MYSQL_INSTANCE_IP_ADDRESS=$(gcloud sql instances describe $MYSQL_INSTANCE_NAME --format="value(ipAddresses[0].ipAddress)")
+    cp -rf kubernetes/dev.example.com kubernetes/developer.acme.com
+    ```
+9. Modify the kubernetes/developer.acme.com/kustomization.yaml file to add in the Database server details and credentials.
+    ```
+          - database-host=127.0.0.1
+          - database-port=3306
+          - database-name=devportal
    
-    kubectl create configmap apigee-devportal-configuration\
-        --from-literal=database-host=$MYSQL_INSTANCE_IP_ADDRESS \
-        --from-literal=database-port=3306 \
-        --from-literal=database-name=$DRUPAL_DB_NAME \
-        --from-literal=database-driver=mysql    
+         - dbusername=dbuser
+         - dbpassword=dbp@ssw0rd
     ```
-10. Setup the Kubenetes Secret to configure the Database username and password
+   Update the image URL to build from your project. Insert your GCP Project Name.
     ```
-    kubectl create secret generic apigee-devportal-credentials \
-        --from-literal=dbusername=$DRUPAL_DB_USER \
-        --from-literal=dbpassword=$DRUPAL_DB_PASS
+     newName: gcr.io/<GCP-PROJECT-NAME>/apigee-devportal
+    ```
+   
+10. Modify the kubernetes/developer.acme.com/filestore-patch.yaml to add in your filestore details
+    Modify the path if you modified the above command. 
+    Add in the IP address of the Filestore instance
+    ```
+    server: <Filestore_ip>
+    path: /portal_files
     ```
 
 11. Create the deployment using the following command
     ```
-    kubectl apply -f kubernetes/
+    kubectl apply -k kubernetes/developer.acme.com/
     ```
-
-12. Get the Load Balancer IP from the Services. Use that to start the install process from the browser.
+13. Get the IP Address of the apigee-portal-ingress from the Services. Use that to start the drupal install process from the browser.
 
 
 ## Running this setup locally

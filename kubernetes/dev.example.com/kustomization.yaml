@@ -1,0 +1,29 @@
+# configuration maps for application
+configMapGenerator:
+- name: apigee-devportal-configuration
+  literals:
+  - database-host=127.0.0.1
+  - database-port=3306
+  - database-name=devportal
+  - database-driver=mysql
+# Use website-url to specify DNS name for this site eg. developer.acme.com
+#  - website-url=developer.example.com
+
+# secrets for database credentials
+secretGenerator:
+- name: apigee-devportal-credentials
+  literals:
+  - dbusername=dbuser
+  - dbpassword=dbp@ssw0rd
+
+# use this to swap default image with your custom image
+images:
+- name: gcr.io/gkoli-workspace/apigee-devportal
+  newName: gcr.io/<GCP-PROJECT-NAME>/apigee-devportal
+  newTag: latest
+
+bases:
+- ../base
+
+patches:
+- filestore-patch.yaml

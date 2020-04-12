@@ -19,7 +19,7 @@ spec:
                 claimName: apigee-devportal-drupal-files
           containers:
             - name: apigee-devportal-cronjob
-              image: gcr.io/gkoli-workspace/apigee-devportal-kickstart:latest
+              image: gcr.io/gkoli-workspace/apigee-devportal:latest
               args:
                 - /bin/sh
                 - -c

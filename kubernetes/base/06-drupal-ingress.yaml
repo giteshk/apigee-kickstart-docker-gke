@@ -1,0 +1,8 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: apigee-portal-ingress
+spec:
+  backend:
+    serviceName: apigee-portal-nodeport-service
+    servicePort: 80

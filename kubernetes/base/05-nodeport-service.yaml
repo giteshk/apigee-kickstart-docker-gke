@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    beta.cloud.google.com/backend-config: '{"ports": {"80":"apigee-portal-cdn-backend"}}'
+  name: apigee-portal-nodeport-service
+spec:
+  selector:
+    role: apigee-devportal-drupal-web-server
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: drupal-app-port

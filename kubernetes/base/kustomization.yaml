@@ -1,0 +1,32 @@
+commonLabels:
+  app: apigee-devportal
+
+# Use apigee-portal namespace
+namespace: apigee-portal
+
+# configuration maps for application
+configMapGenerator:
+- name: apigee-devportal-configuration
+  literals:
+  - database-host=127.0.0.1
+  - database-port=3306
+  - database-name=devportal
+  - database-driver=mysql
+# Use website-url to specify DNS name for this site eg. developer.acme.com
+#  - website-url=
+
+# secrets for database credentials
+secretGenerator:
+- name: apigee-devportal-credentials
+  literals:
+  - dbusername=dbuser
+  - dbpassword=dbp@ssw0rd
+
+resources:
+- 01-namespace.yaml
+- 02-drupal-files-pvc.yaml
+- 03-drupal-deployment.yaml
+- 04-cdn-backend.yaml
+- 05-nodeport-service.yaml
+- 06-drupal-ingress.yaml
+- 07-drupal-cron.yaml
