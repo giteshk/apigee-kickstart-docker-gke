@@ -1,4 +1,5 @@
 #!/bin/bash
+  alias composer="php -d disable_functions='' -d memory_limit=-1 /usr/local/bin/composer"
 
   rm -rf /app/code/*
 
