@@ -45,12 +45,7 @@ COPY container-assets container-assets
 COPY container-assets/nginx-app.conf nginx-app.conf
 COPY container-assets/php.ini php.ini
 
-# Volumes for public, private and temp files
-VOLUME /app/code/web/sites/default/files
-VOLUME /app/drupal-files/private
-VOLUME /app/drupal-files/temp
-VOLUME /app/drupal-files/config
-
-RUN /app/container-assets/setup-distribution.sh
-
-CMD ["/app/container-assets/startup.sh"]
+# Volumes for public, private and temp  and config files
+VOLUME /app/drupal-files
+#Volume for code directory
+VOLUME /app/code

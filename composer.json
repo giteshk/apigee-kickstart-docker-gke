@@ -5,7 +5,7 @@
     "authors": [
         {
             "name": "Gitesh Koli",
-            "email": "gkoli@google.com"
+            "email": "gk@gk-work.net"
         }
     ],
     "require": {
@@ -23,6 +23,6 @@
         "ext-spl": "*",
         "ext-tokenizer": "*",
         "ext-xml": "*",
-        "php": "^7.2"
+        "php": "^7.3"
     }
 }

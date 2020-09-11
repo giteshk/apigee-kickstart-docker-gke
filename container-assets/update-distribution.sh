@@ -1,6 +1,6 @@
 #!/bin/bash
 
-composer update --working-dir=/app/code --with-dependencies
+composer update --working-dir=/app/code --with-dependencies -o
 find /app/code -mindepth 2 -type d -name .git | xargs rm -rf
 
 ./setup-distribution.sh

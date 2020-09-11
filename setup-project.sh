@@ -20,6 +20,7 @@ set -xe
 chmod -R 777 .
 
 docker-compose run --rm \
+        -v $(pwd)/code:/app/code \
         --entrypoint="/bin/bash" apigee-kickstart \
         /app/container-assets/setup-distribution.sh
 
