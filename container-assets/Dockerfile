@@ -33,7 +33,8 @@ ENV DRUPAL_FILE_PUBLIC_PATH "sites/default/files"
 ENV DRUPAL_FILE_PRIVATE_PATH "/app/drupal-files/private"
 ENV DRUPAL_FILE_TEMP_PATH "/app/drupal-files/temp"
 ENV DRUPAL_CONFIG_SYNC_DIR "/app/drupal-files/config"
-
+ENV GIT_CODE_REPO "https://github.com/drupal/recommended-project.git"
+ENV GIT_CODE_BRANCH "8.9.x"
 #skip lockdown because the setup and startup scripts take care of this
 ENV SKIP_LOCKDOWN_DOCUMENT_ROOT "true"
 

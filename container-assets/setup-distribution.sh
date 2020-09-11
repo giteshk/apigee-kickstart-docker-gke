@@ -1,5 +1,9 @@
 #!/bin/bash
 
+  rm -rf /app/code/*
+
+  git clone -b $GIT_CODE_BRANCH $GIT_CODE_REPO /app/code
+
   if [ ! -d /app/code/vendor ]; then
       composer install --working-dir=/app/code -o
   fi
