@@ -3,10 +3,10 @@
 
   rm -rf /app/code/*
 
-  git clone -b $GIT_CODE_BRANCH $GIT_CODE_REPO /app/code
+  git clone -v -b $GIT_CODE_BRANCH $GIT_CODE_REPO /app/code
 
   if [ ! -d /app/code/vendor ]; then
-      composer install --working-dir=/app/code -o
+      composer install --working-dir=/app/code --no-dev -o
   fi
   if [ ! -d /app/code/vendor/bin/drush ]; then
         #make sure drush is installed
@@ -37,7 +37,7 @@
   if [ "${LOCAL_SETUP}" = "true" ]; then
     chmod -R 777 /app/drupal-files /app/code/web/sites/default/files
   else
-    ln -s -f /app/code/web/sites/default/files ../../../../../drupal-files/public
+    ln -sf  /app/drupal-files/public /app/code/web/sites/default/files
     chown -R www-data:www-data /app/drupal-files /app/code/web/sites/default/files /app/code/web/sites/default/settings.php
     chmod -R 770 /app/drupal-files /app/code/web/sites/default/files /app/code/web/sites/default/settings.php
   fi
