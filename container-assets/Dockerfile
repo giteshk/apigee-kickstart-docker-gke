@@ -40,8 +40,6 @@ ENV SKIP_LOCKDOWN_DOCUMENT_ROOT "true"
 
 WORKDIR /app
 
-COPY code code
-COPY drupal-files drupal-files
 COPY container-assets container-assets
 COPY container-assets/nginx-app.conf nginx-app.conf
 COPY container-assets/php.ini php.ini
